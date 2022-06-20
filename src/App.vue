@@ -33,6 +33,9 @@ const lessons = computed(() => result.value?.lessons ?? [])
     <div v-else-if="error">
         <span>Falha ao carregar: {{ error.message }}</span>
     </div>
+    <div v-else-if="!lessons.lenght">
+        <span>Nenhuma aula encontrada</span>
+    </div>
     <ul v-else-if="lessons.lenght">
         <li v-for="lesson in lessons" :key="lesson.id">
             {{ lesson.title }}
