@@ -6,7 +6,7 @@ import { Lessons } from "./types/lessons";
 import BaseButton from "./components/base/BaseButton.vue";
 
 const { result, loading, error } = useQuery(GET_LESSONS_QUERY);
-const lessons = computed(() => result?.lessons ?? [] as Lessons[]);
+const lessons = computed(() => result.value.lessons ?? [] as Lessons[]);
 
 </script>
 
