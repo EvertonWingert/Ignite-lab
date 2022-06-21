@@ -1,8 +1,12 @@
-import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client/core";
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+} from "@apollo/client/core";
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
-	uri: import.meta.env.VITE_API_URL,
+  uri: import.meta.env.VITE_API_URL,
 });
 
 // Cache implementation
@@ -10,8 +14,8 @@ const cache = new InMemoryCache();
 
 // Create the apollo client
 const apolloClient = new ApolloClient({
-	link: httpLink,
-	cache,
+  link: httpLink,
+  cache,
 });
 
 export { apolloClient };
