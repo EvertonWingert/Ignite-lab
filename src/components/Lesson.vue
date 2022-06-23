@@ -22,12 +22,12 @@ const isLessonAvailable = computed(() => isPast(props.availableAt));
 </script>
 
 <template>
-  <a href="#">
+  <router-link :to="`/event/lesson/${slug}`" class="group">
     <span class="text-gray-300">
       {{ availableDateFormatted }}
     </span>
 
-    <div class="mt-2 rounded border border-gray-500 p-4">
+    <div class="mt-2 rounded border border-gray-500 p-4 group-hover:border-green-500 transition-colors">
       <header class="flex items-center justify-between">
         <span
           v-if="isLessonAvailable"
@@ -53,5 +53,5 @@ const isLessonAvailable = computed(() => isPast(props.availableAt));
         {{ title }}
       </strong>
     </div>
-  </a>
+  </router-link>
 </template>

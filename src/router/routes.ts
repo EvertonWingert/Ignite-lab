@@ -1,6 +1,6 @@
 export const routes = [
   {
-    path: "/",
+    path: "/event",
     name: "event",
     component: () => import("../pages/Event.vue"),
   },
@@ -8,5 +8,10 @@ export const routes = [
     path: "/login",
     name: "login",
     component: () => import("../pages/Login.vue"),
+  },
+  {
+    path: "/event/lesson/:slug",
+    name: "lesson",
+    component: () => import("../pages/Event.vue"),
   },
 ];

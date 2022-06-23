@@ -11,6 +11,8 @@
   "dependencies": {
     "@apollo/client": "^3.6.8",
     "@heroicons/vue": "^1.0.6",
+    "@vime/core": "^5.3.1",
+    "@vime/vue-next": "^5.3.1",
     "@vue/apollo-composable": "^4.0.0-alpha.17",
     "date-fns": "^2.28.0",
     "graphql": "^16.5.0",
