@@ -6,4 +6,12 @@ const router = createRouter({
   routes: routes,
 });
 
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = true;
+
+  if (to.name !== "subscribe" && !isAuthenticated) next({ name: "subscribe" });
+  else if (to.name === "login" && isAuthenticated) next({ name: "event" });
+  else next();
+});
+
 export default router;

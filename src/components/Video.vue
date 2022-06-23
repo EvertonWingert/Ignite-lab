@@ -3,14 +3,13 @@ import {
   LightningBoltIcon,
   DownloadIcon,
   ChevronRightIcon,
-  PhotographIcon
+  PhotographIcon,
 } from "@heroicons/vue/solid";
 import BaseButton from "./BaseButton.vue";
 import VideoPlayer from "./VideoPlayer.vue";
 import { useQuery } from "@vue/apollo-composable";
-import { GET_LESSON_BY_SLUG_QUERY } from "../graphql/queries/lessons-query";
 import { watch } from "vue";
-import SkeletonLoading from "./SkeletonLoading.vue";
+import gql from "graphql-tag";
 
 interface Props {
   lessonSlug: string;
@@ -32,25 +31,36 @@ interface GetLessonBySlugResponse {
 }
 
 const { result, error, loading, variables } = useQuery<GetLessonBySlugResponse>(
-  GET_LESSON_BY_SLUG_QUERY,
+  gql`
+    query GetLessonBySlug($slug: String) {
+      lesson(where: { slug: $slug }) {
+        title
+        videoId
+        description
+        teacher {
+          bio
+          avatarURL
+          name
+        }
+      }
+    }
+  `,
   {
-    slug: props.lessonSlug
+    slug: props.lessonSlug,
   }
 );
 
-
-watch(() => props.lessonSlug, (newValue: Props["lessonSlug"]) => {
-  variables.value = {
-    newValue
-  };
-});
-
-
+watch(
+  () => props.lessonSlug,
+  (newValue: Props["lessonSlug"]) => {
+    variables.value = {
+      newValue,
+    };
+  }
+);
 </script>
 <template>
-
   <div class="flex-1">
-
     <div v-if="loading">
       <span>Carregando...</span>
     </div>
@@ -59,7 +69,7 @@ watch(() => props.lessonSlug, (newValue: Props["lessonSlug"]) => {
     </div>
 
     <div v-else>
-      <div  class="flex justify-center bg-black">
+      <div class="flex justify-center bg-black">
         <div class="aspect-video h-full max-h-[60vh] w-full max-w-[1100px]">
           <VideoPlayer :link="result.lesson.videoId" />
         </div>
@@ -69,24 +79,24 @@ watch(() => props.lessonSlug, (newValue: Props["lessonSlug"]) => {
         <div class="flex items-start gap-16">
           <div class="flex-1">
             <h1 class="text-2xl font-bold">{{ result.lesson.title }}</h1>
-            <p class="mt-4 leading-relaxed text-gray-200">{{ result.lesson.description }}</p>
+            <p class="mt-4 leading-relaxed text-gray-200">
+              {{ result.lesson.description }}
+            </p>
 
             <div class="mt-6 flex items-center gap-4">
-
               <img
                 class="h-16 w-16 rounded-full border-2 border-blue-500"
                 :src="result.lesson?.teacher?.avatarURL"
                 alt=""
               />
 
-
               <div class="leading-relaxed">
-                <strong class="text-block text-2xl font-bold"
-                >{{ result.lesson.teacher.name }}</strong
-                >
-                <span class="text block text-sm text-gray-200"
-                >{{ result.lesson.teacher.bio }}</span
-                >
+                <strong class="text-block text-2xl font-bold">{{
+                  result.lesson.teacher.name
+                }}</strong>
+                <span class="text block text-sm text-gray-200">{{
+                  result.lesson.teacher.bio
+                }}</span>
               </div>
             </div>
           </div>

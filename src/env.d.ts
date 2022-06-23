@@ -9,6 +9,7 @@ declare module "*.vue" {
 
 interface ImportMetaEnv {
   readonly API_URL: string;
+  readonly AUTH_TOKEN: string;
   // more env variables...
 }
 

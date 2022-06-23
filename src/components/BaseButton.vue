@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Spinner from "./Spinner.vue";
 const VARIANTS = {
   primary: "bg-green-500 text-white  hover:bg-green-700",
   secondary:
@@ -7,19 +8,20 @@ const VARIANTS = {
 
 interface props {
   variant: string;
+  loading: boolean;
 }
 
 defineProps<props>();
 </script>
 
 <template>
-  {{}}
   <button
     :class="[
       VARIANTS[variant],
-      'flex items-center gap-4 rounded p-4 text-sm transition-colors',
+      'flex w-full items-center justify-center gap-4 rounded p-4 text-sm transition-colors disabled:opacity-50',
     ]"
   >
-    <slot />
+    <Spinner v-if="loading" />
+    <slot v-else />
   </button>
 </template>

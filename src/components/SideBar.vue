@@ -1,10 +1,26 @@
 <script setup lang="ts">
 import Lesson from "./Lesson.vue";
 import { GetLessonsQueryResponse } from "../types/lessons";
-import { GET_LESSONS_QUERY } from "../graphql/queries/lessons-query";
 import { useQuery } from "@vue/apollo-composable";
+import { gql } from "@apollo/client/core";
 
-const { result } = useQuery<GetLessonsQueryResponse>(GET_LESSONS_QUERY);
+interface Props {
+  slug: string;
+}
+
+defineProps<Props>();
+
+const { result } = useQuery<GetLessonsQueryResponse>(gql`
+  query {
+    lessons(orderBy: availableAt_ASC, stage: PUBLISHED) {
+      id
+      lessonType
+      availableAt
+      title
+      slug
+    }
+  }
+`);
 </script>
 <template>
   <aside class="w-[348px] border-l border-gray-600 bg-gray-700 p-6">
@@ -19,6 +35,7 @@ const { result } = useQuery<GetLessonsQueryResponse>(GET_LESSONS_QUERY);
           :slug="lesson.slug"
           :available-at="new Date(lesson.availableAt)"
           :type="lesson.lessonType"
+          :is-active="lesson.slug === slug"
         />
       </div>
     </div>

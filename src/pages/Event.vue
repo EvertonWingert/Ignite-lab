@@ -7,9 +7,7 @@ import { computed } from "vue";
 
 const route = useRoute();
 
-
 const slug = computed(() => route.params.slug as string);
-
 </script>
 <template>
   <div class="flex min-h-screen flex-col">
@@ -19,7 +17,7 @@ const slug = computed(() => route.params.slug as string);
       <div v-else class="flex-1">
         <span>Oi</span>
       </div>
-      <SideBar />
+      <SideBar :slug="slug" />
     </main>
   </div>
 </template>

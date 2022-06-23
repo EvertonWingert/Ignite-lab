@@ -1,7 +1,4 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 <template>
-  <div class="animate-pulse bg-gray-700 w-full h-12"></div>
+  <div class="h-12 w-full animate-pulse bg-gray-700"></div>
 </template>
-
-

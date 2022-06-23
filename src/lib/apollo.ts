@@ -7,6 +7,9 @@ import {
 // HTTP connection to the API
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_API_URL,
+  headers: {
+    Authorization: `Bearer ${import.meta.env.VITE_AUTH_TOKEN}`,
+  },
 });
 
 // Cache implementation
