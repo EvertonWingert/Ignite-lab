@@ -30,6 +30,7 @@ const form = reactive({
 
 async function handleSubscribe(name: string, email: string) {
   await createSubscriber({ name, email });
+  localStorage.setItem("subscribed", "true");
   await router.push({ name: "event" });
 }
 </script>

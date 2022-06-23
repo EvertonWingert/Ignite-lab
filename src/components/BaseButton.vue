@@ -8,7 +8,7 @@ const VARIANTS = {
 
 interface props {
   variant: string;
-  loading: boolean;
+  loading?: boolean;
 }
 
 defineProps<props>();
