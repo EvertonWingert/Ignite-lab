@@ -9,7 +9,6 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const isAuthenticated = !!localStorage.getItem("subscribed") as boolean;
 
-  console.log(to.meta.requiresAuth, isAuthenticated);
   if (to.meta.requiresAuth && !isAuthenticated) {
     return next({
       name: "subscribe",
