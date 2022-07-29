@@ -1,7 +1,7 @@
 <img src=".github/home.png" alt="home" />
 
 <h2 align="center">
-   Pokedex 
+   Ignite Lab 
 </h2>
 
 <p align="center">
